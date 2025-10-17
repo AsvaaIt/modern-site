@@ -11,6 +11,7 @@ export default defineConfig({
     },
   },
   server: {
+    allowedHosts: ['asvaait.onrender.com'],
      host: true,
     port: 80,
     open: true,
