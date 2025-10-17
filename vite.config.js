@@ -11,7 +11,7 @@ export default defineConfig({
     },
   },
   server: {
-     host: server.allowedHosts,
+     host: true,
     port: 80,
     open: true,
   },
