@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     allowedHosts: ['asvaait.onrender.com'],
      host: true,
-    port: 443,
+    port: 10000,
     open: true,
   },
 });
