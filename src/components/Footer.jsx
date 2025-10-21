@@ -7,7 +7,7 @@ import { FaLinkedin, FaTwitter } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="footer" style={styles.footer}>
-      <p>© 2025 ASVAA IT Service & Solutions | Crafted with 💙 and Innovation.</p>
+      <p>© 2025 ASVAA IT Services & Solutions | Crafted with 💙 and Innovation.</p>
 
       <div style={styles.socialIcons}>
         <a
