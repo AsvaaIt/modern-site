@@ -15,7 +15,7 @@ import { io } from "socket.io-client";
 
 function App() {
   useEffect(() => {
-    const socket = io("https://modern-site-2-backend.onrender.com");
+    const socket = io("https://modern-site-1-backend.onrender.com/");
 
     // Emit visitor info on page load
     socket.emit("new-visitor", {
