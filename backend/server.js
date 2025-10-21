@@ -3,13 +3,19 @@ import http from "http";
 import { Server } from "socket.io";
 import useragent from "useragent";
 import geoip from "geoip-lite";
+import path from "path";
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // or "https://your-frontend-app.onrender.com" for security
+    methods: ["GET", "POST"]
+  }
+});
 
-// Serve frontend
-app.use(express.static("public"));
+// Serve dashboard files
+app.use(express.static(path.join(process.cwd(), "public")));
 
 // Visitor tracking middleware
 app.use((req, res, next) => {
@@ -27,16 +33,17 @@ app.use((req, res, next) => {
     device: agent.device.toString(),
     country: geo.country || "Unknown",
     city: geo.city || "Unknown",
-    geo // coordinates for map
+    geo
   };
 
   io.emit("new-visitor", visitorInfo);
   next();
 });
 
-app.get("/", (req, res) => {
-  res.sendFile(`${process.cwd()}/public/index.html`);
+// Catch-all to serve dashboard
+app.get("*", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "public", "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Backend running on port ${PORT}`));

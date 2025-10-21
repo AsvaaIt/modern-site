@@ -8,10 +8,24 @@ import Contact from "./components/Contact.jsx";
 import designDetail from "./assets/design-detail.jpg";
 import webdevDetail from "./assets/webdev-detail.jpg";
 import cloudDetail from "./assets/cloud-detail.jpg";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 
 
 
 function App() {
+  useEffect(() => {
+    const socket = io("https://your-backend-app.onrender.com");
+
+    // Emit visitor info on page load
+    socket.emit("new-visitor", {
+      ip: "auto-detected or from backend",
+      url: window.location.href,
+      timestamp: new Date().toISOString()
+    });
+
+    return () => socket.disconnect(); // cleanup
+  }, []);
   return (
     <>
       <Header />
